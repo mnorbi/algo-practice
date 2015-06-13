@@ -27,7 +27,7 @@ Recurrence matrix form:
 **/
 public class NoConsecutiveOneBitStringCount{
   public static void main(String[]args){
-    long count = findCount(2);
+    long count = findCount(5);
     System.out.println(count);
   }
   private static long findCount(int len){ 
