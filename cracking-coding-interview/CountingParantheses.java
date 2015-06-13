@@ -1,3 +1,48 @@
+/**
+Grammar definition:
+Any -> Onion
+       -> Prefix
+       -> Suffix
+       -> Mid
+       -> ()
+
+Onion -> (Any)
+
+Prefix -> ()Prefix
+          -> ()Onion           
+
+Suffix -> Suffix()
+          -> Onion()
+
+Mid -> ()Any()
+       -> ()()
+
+Recurrence:
+  Any(N) = 
+    0 if N = 0
+    1 if N == 1
+    Onion(N)+Pfx(N)+Sfx(N)+Mid(N)
+
+  Onion(N) =
+    0 if N == 0 || N == 1
+    Any(N-1)
+
+  Pfx(N) =
+    0 if N == 0 || N == 1
+    Onion(N-1)+Pfx(N-1)
+
+  Sfx(N) = 
+    0 if N == 0 || N == 1
+    Onion(N-1)+Sfx(N-1)
+ 
+  Mid(N) =
+    0 if N == 0 || N == 1 || N == 2
+    Any(N-2)
+
+Result definition:
+  Result = Any(N)
+
+**/
 public class CountingParantheses{
   public static void main(String[]args){
     long count = allCount(6);
