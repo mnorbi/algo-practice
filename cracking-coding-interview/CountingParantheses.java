@@ -1,21 +1,21 @@
 /**
 Grammar definition:
 Any -> Onion
-       -> Prefix
-       -> Suffix
-       -> Mid
-       -> ()
+    -> Prefix
+    -> Suffix
+    -> Mid
+    -> ()
 
 Onion -> (Any)
 
 Prefix -> ()Prefix
-          -> ()Onion           
+       -> ()Onion           
 
 Suffix -> Suffix()
-          -> Onion()
+       -> Onion()
 
 Mid -> ()Any()
-       -> ()()
+    -> ()()
 
 Recurrence:
   Any(N) = 
