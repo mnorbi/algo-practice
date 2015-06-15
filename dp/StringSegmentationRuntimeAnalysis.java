@@ -22,6 +22,11 @@ public class StringSegmentationRuntimeAnalysis{
     return segment(0);
   }
 
+  /**
+   Key insight: if we use DP, there
+   are only N suffixes which could be cached
+   for later.
+  **/
   boolean segment(int from){
     ++runtime;
     if (from >= chars.length){
@@ -31,7 +36,7 @@ public class StringSegmentationRuntimeAnalysis{
       return dp[from];
     }
     for(int i = from+1; i <= chars.length; ++i){
-      runtime += i-from;//using Rabin Karp rolling hash, runtime is linear, but we need to preprocess the dictionary
+      runtime += i-from;//using Rabin Karp rolling hash, runtime could be linear instead of current quadratic, but we need to preprocess the dictionary
       if (dict.contains(chars, from,i)){
         if (segment(i)){
           return true;
