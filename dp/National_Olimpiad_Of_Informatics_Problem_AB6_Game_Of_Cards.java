@@ -53,10 +53,15 @@ public class National_Olimpiad_Of_Informatics_Problem_AB6_Game_Of_Cards{
         System.out.println(maxProfitIter(new int[]{4, 5, 6, 2}));
     }
     static int maxProfitIter(int[] arr){
-        int[][] dp = new int[arr.length][arr.length];
-
-        for(int gap = 1; gap <= arr.length-2; ++gap){
-            for(int lo = 0, hi = lo+gap+1; hi < arr.length; ++lo, hi=lo+gap+1){
+        int N = arr.length;
+        int[][] dp = new int[N][N];
+        /* omitted java specific init:
+        for(int lo = 0; lo+1 < N; ++lo){
+          dp[lo][lo+1] = 0;
+        }
+        */
+        for(int gap = 1; gap <= N-2; ++gap){
+            for(int lo = 0, hi = lo+gap+1; hi < N; ++lo, hi=lo+gap+1){
                 int lastIdx = -1;
                 for(int i = lo+1; i < hi; ++i){
                     int profit = dp[lo][i]+dp[i][hi];
@@ -68,7 +73,7 @@ public class National_Olimpiad_Of_Informatics_Problem_AB6_Game_Of_Cards{
                 dp[lo][hi] += profitFunc(arr, lo, lastIdx, hi);
             }
         }
-        return dp[0][arr.length-1];
+        return dp[0][N-1];
     }
     static int maxProfitRec(int[] arr){
         return maxProfitRec(arr, 0, arr.length-1);
