@@ -4,6 +4,7 @@ public class CountWaysOfChangingCoins{
     System.out.println(countOpt(10, new int[]{1,2,3}));
     System.out.println(countOpt(10, new int[]{1,3,5}));
     System.out.println(countOpt(10, new int[]{1,4,7}));
+    System.out.println(countOpt(10, new int[]{7,1,4}));
 
   }
 
