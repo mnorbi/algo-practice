@@ -2,7 +2,7 @@ import java.util.*;
 class TextJustification{
     public static void main(String[]args){
         System.out.println(
-                justify("1234 123 12 1 1234567 123 12345 12 123 1234 123456", 11));
+                justify("1234 123 12 1 1234567 123 12345 12 123 1234 123456", 13));
     }
 
     public static String justify(String input, int w){
@@ -11,15 +11,15 @@ class TextJustification{
         int[] penalty = new int[arr.length+1];
         int[] prev = new int[arr.length];
         penalty[0] = 0;//initially forgot to set up the default 0 penalty case
-        penalty[1] = penalty(w,arr,0);
+        penalty[1] = penalty(w,arr[0].length());
         for(int i = 1; i < arr.length; ++i){
-            penalty[i+1] = penalty[i]+penalty(w,arr,i);//did not add previous penalty
+            penalty[i+1] = penalty[i]+penalty(w,arr[i].length());//did not add previous penalty
             prev[i] = i;//did not and later incorrectly initialized, by default each word goes into a new row
             int lineWidth = arr[i].length();
             for(int j = i-1; j >= 0; --j){
                 lineWidth += arr[j].length()+1;
                 if (lineWidth > w) break;
-                int newPenalty = penalty[j] + (w-lineWidth);
+                int newPenalty = penalty[j] + penalty(w,lineWidth);
                 if (newPenalty < penalty[i+1]){
                     penalty[i+1] = newPenalty;
                     prev[i] = j;
@@ -43,7 +43,7 @@ class TextJustification{
         String prev = "\n";
         while(it.hasNext()){
             String next = it.next();
-            if (!"\n".equals(next) && !"\n".equals(prev)) {
+            if (!"\n".equals(next) && !"\n".equals(prev)) {//incorrectly determined the condition for space
                 sb.append(" ");
             }
             sb.append(next);
@@ -52,7 +52,8 @@ class TextJustification{
         return sb.toString();
     }
 
-    private static int penalty(int w, String[] arr, int i){
-        return Math.abs(w-arr[i].length());
+    private static int penalty(int pageWidth, int textWidth){
+        int ret = Math.abs(pageWidth-textWidth);
+	return ret*ret*ret;
     }
 }
