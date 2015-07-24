@@ -10,7 +10,7 @@ class TextJustification{
         String[] arr = input.split(" ");
         int[] penalty = new int[arr.length+1];
         int[] prev = new int[arr.length];
-        penalty[0] = 0;
+        penalty[0] = 0;//initially forgot to set up the default 0 penalty case
         penalty[1] = penalty(w,arr,0);
         for(int i = 1; i < arr.length; ++i){
             penalty[i+1] = penalty[i]+penalty(w,arr,i);//did not add previous penalty
