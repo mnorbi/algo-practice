@@ -21,15 +21,18 @@ class MaxSlidingWindow{
         for(int i = 0, time = 0; i < arr.length; ++i){
             Node next = arr[i];
             while(time < next.time && !deq.isEmpty()){
-                if(time < deq.peekFirst().time){
-                    time = deq.peekFirst().time;
-                } else if(time <= deq.peekFirst().time+timeInterval){
-                    ret.add(new Node(deq.peekFirst().val, time++));
+                Node first = deq.peekFirst();
+                if(time < first.time){
+                    time = first.time;
+                } else if(time <= first.time+timeInterval){
+                    ret.add(new Node(first.val, time++));
                 } else {
                     deq.removeFirst();
                 }
             }
-            while(!deq.isEmpty() && deq.peekLast().time+timeInterval >= next.time && compareNodes(deq.peekLast(), next) <= 0){
+            while(!deq.isEmpty() 
+			&& (next.time <= deq.peekLast().time+timeInterval) 
+			&& (compareNodes(deq.peekLast(), next) <= 0)){
                 deq.removeLast();
             }
             deq.addLast(next);
@@ -46,8 +49,7 @@ class MaxSlidingWindow{
     static void print(List<Node> nodes){
         for(Iterator<Node> it = nodes.iterator(); it.hasNext();){
             Node next = it.next();
-            System.out.print(next);
-            System.out.print(" ");
+            System.out.println(next);
         }
     }
     static class Node{
@@ -68,7 +70,7 @@ class MaxSlidingWindow{
             this.val = val;
         }
         public String toString(){
-            return String.format("time[%d],val[%f]",time,val);
+            return String.format("[ts:%d val:%1.1f]",time,val);
         }
     }
 }
