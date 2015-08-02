@@ -19,24 +19,19 @@ class ElementsClosestToMedian{
         int lMedId = (n-1)/2;
         int rMedId = n/2;
 
-        quickSelect(lMedId+1, arr, 0, n);
+        kthElement(lMedId + 1, arr, 0, n);
         if (n%2 == 0){
-            quickSelect(1, arr, rMedId, n);
+            kthElement(1, arr, rMedId, n);
         }
 
         Median median = new Median(arr[lMedId], arr[rMedId]);
 
-        quickSelect(lMedId-k, arr, 0, lMedId);
-        quickSelect(k, arr, rMedId, n);
+        kthElement(k, arr, 0, n, distanceToMedianComparator(median));
 
-        int lo = Math.max(0, lMedId-k);
-        int hi = Math.min(rMedId+k, n);
-        quickSelect(k, arr, lo, hi, distanceToMedianComparator(median));
-
-        return Arrays.copyOfRange(arr, lo, lo+k);
+        return Arrays.copyOfRange(arr, 0, k);
     }
 
-    static void quickSelect(int k, int[] arr, int lo, int hi, IntComparator c){
+    static void kthElement(int k, int[] arr, int lo, int hi, IntComparator c){
         int n = hi-lo;
         if (k < 1 || k > n) return;
 
@@ -65,8 +60,8 @@ class ElementsClosestToMedian{
         }
     }
 
-    static void quickSelect(int k, int[] arr, int lo, int hi){
-        quickSelect(k, arr, lo, hi, NATURAL_COMPARATOR);
+    static void kthElement(int k, int[] arr, int lo, int hi){
+        kthElement(k, arr, lo, hi, NATURAL_COMPARATOR);
     }
 
     static IntComparator distanceToMedianComparator(final Median median){
