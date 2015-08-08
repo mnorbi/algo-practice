@@ -52,6 +52,7 @@ class State{
                 ret.add(new State(nextItem, alloc, Math.max(i, this.lastBucket)));
             }
             alloc[i] -= arr[nextItem];
+            if (alloc[i] == 0) break;
         }
         return ret;
     }
