@@ -1,22 +1,22 @@
 public class FindTheFirstMissingPositiveEntry_Question22dot2{
     public static void main(String[] args) {
-        System.out.println(firstMissingPositiveEntry2(new int[]{}));
-        System.out.println(firstMissingPositiveEntry2(new int[]{0}));
-        System.out.println(firstMissingPositiveEntry2(new int[]{1}));
-        System.out.println(firstMissingPositiveEntry2(new int[]{2}));
-        System.out.println(firstMissingPositiveEntry2(new int[]{5, 4, 3, 2, 1, -1, 0, 0, -1}));
-        System.out.println(firstMissingPositiveEntry2(new int[]{-1, 1, 4, -1, 3, 2, 1, 1000}));
-        System.out.println(firstMissingPositiveEntry2(new int[]{3, 5, 4, -1, 5, 1, -1}));
+        System.out.println(firstMissingPositiveEntry(new int[]{}));
+        System.out.println(firstMissingPositiveEntry(new int[]{0}));
+        System.out.println(firstMissingPositiveEntry(new int[]{1}));
+        System.out.println(firstMissingPositiveEntry(new int[]{2}));
+        System.out.println(firstMissingPositiveEntry(new int[]{5, 4, 3, 2, 1, -1, 0, 0, -1}));
+        System.out.println(firstMissingPositiveEntry(new int[]{-1, 1, 4, -1, 3, 2, 1, 1000}));
+        System.out.println(firstMissingPositiveEntry(new int[]{3, 5, 4, -1, 5, 1, -1}));
     }
 
-    static int firstMissingPositiveEntry2(int[] arr) {
+    static int firstMissingPositiveEntry(int[] arr) {
         int N = arr.length;
         for (int i = 0; i < N; ) {
-            if (arr[i] < 1 || arr[i] > N) {
+            if (arr[i] < 1 || arr[i] > N){
                 arr[i] = arr[--N];
                 continue;
-            } else if (!swap(arr, arr[i]-1, i)){//-1 because for example 1 is stored on arr[0]
-              ++i;
+            } else if (!swap(arr, arr[i]-1, i)){
+                ++i;
             }
         }
 
