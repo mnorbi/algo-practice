@@ -1,6 +1,9 @@
 import java.util.Comparator;
 import java.util.PriorityQueue;
-
+/**
+  Problem solved with the disjoint set datastructure.
+  http://www.lintcode.com/en/problem/trapping-rain-water-ii/
+**/
 class Solution {
     static final int[][] dir = new int[][]{
             {-1, 0}, {1, 0}, {0, -1}, {0, 1}
