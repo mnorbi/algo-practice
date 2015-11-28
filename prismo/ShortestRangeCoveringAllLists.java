@@ -22,7 +22,7 @@ class ShortestRangeCoveringAllLists{
         System.out.println(Arrays.toString(sol2));
     }
     static int[] solve(int[][] mat){
-        Comparator<Cell> comp = (i1, i2) -> Integer.compare(mat[i1.row][i1.col], mat[i2.row][i2.col]);
+        Comparator<Cell> comp = (c1, c2) -> Integer.compare(mat[c1.row][c1.col], mat[c2.row][c2.col]);
         Cell rangeStart = findRangeStart(mat, comp);
         return createRange(mat, comp, rangeStart);
     }
