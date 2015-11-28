@@ -27,16 +27,16 @@ class ShortestRangeCoveringAllLists{
         return createRange(mat, comp, rangeStart);
     }
 
-    private static Item findRangeStart(int[][] mat, Comparator<Item> cmp) {
+    private static Item findRangeStart(int[][] mat, Comparator<Item> comp) {
         int ROWS = mat.length;
         int COLS = mat[0].length;
-        PriorityQueue<Item> minPq = new PriorityQueue<>(cmp);
+        PriorityQueue<Item> minPq = new PriorityQueue<>(comp);
         minPq.add(new Item(0, 0));
         Item max = minPq.peek();
         for(int i = 1; i < ROWS; ++i){
             Item item = new Item(i, 0);
             minPq.add(item);
-            if (cmp.compare(max, item) < 0){
+            if (comp.compare(max, item) < 0){
                 max = item;
             }
         }
@@ -52,7 +52,7 @@ class ShortestRangeCoveringAllLists{
             if (min.col == COLS-1) break;
             Item item = new Item(min.row, min.col +1);
             minPq.add(item);
-            if (cmp.compare(max, item) < 0){
+            if (comp.compare(max, item) < 0){
                 max = item;
             }
         }
