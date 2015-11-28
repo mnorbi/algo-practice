@@ -40,14 +40,14 @@ class ShortestRangeCoveringAllLists{
                 max = item;
             }
         }
-        Item minOpt = null;
+        Item ret = null;
         int widthOpt = Integer.MAX_VALUE;
         while(true){
             Item min = minPq.remove();
             int width = mat[max.row][max.col]-mat[min.row][min.col];
             if (widthOpt > width){
                 widthOpt = width;
-                minOpt = min;
+                ret = min;
             }
             if (min.col == COLS-1) break;
             Item item = new Item(min.row, min.col +1);
@@ -56,7 +56,7 @@ class ShortestRangeCoveringAllLists{
                 max = item;
             }
         }
-        return minOpt;
+        return ret;
     }
 
     private static int[] createRange(int[][] mat, Comparator<Item> comp, Item rangeStart) {
