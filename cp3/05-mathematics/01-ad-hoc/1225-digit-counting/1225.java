@@ -16,17 +16,17 @@ class Main{
 	  if (pfx == 0 && (digit > mid || digit == 0)) break;
 
           if (digit < mid){
-            digits[digit] += pfx*j+(j-1)+1;
+            digits[digit] += pfx*j+(j-1)+1;//concatenate prefix with sfx rounded up to 99...9, +1 from all zero values
           } else if (digit > mid){
             if (pfx > 0){
-              digits[digit] += (pfx-1)*j;
+              digits[digit] += (pfx-1)*j;//concatenate decreased prefix
             }
-            digits[digit] += (j-1)+1;
+            digits[digit] += (j-1)+1;//with 99...9 from suffix, +1 from all zero values
           } else {
-            digits[digit] += pfx*j+sfx+1;
+            digits[digit] += pfx*j+sfx+1;//concatenate prefix and suffix, +1 from all zero values
           }
 
-          int zeroCorrection = (digit == 0) ? -j : 0;
+          int zeroCorrection = (digit == 0) ? -j : 0;//if digit==0 and prefix not yet active, the placed digit at j+1th does not yield valid number, because of overcounting previously we need to decrease the count with all the numbers from [0,99..9] which is actually j
 	  digits[digit] += zeroCorrection;
         }
         if (digit > 0) System.out.print(" ");
