@@ -12,7 +12,7 @@ E(n) = sum(inversionCount = minInversionCount..maxInversionCount){inversionCount
 Let C(n) = sum of possible inversions in an n length, distinct valued array
 E(n) = C(n)/n!
 Let's take the increasing ordered n array and iterate over all elements i.
-Take out the last i'th element and put it at the end, we generate (n-i) number of inversions by doing this for each permutation
+Take out the i'th element and put it at the end, we generate (n-i) number of inversions by doing this for each permutation
 of a smaller (n-1) length array.
 
 Recurrence relation:
