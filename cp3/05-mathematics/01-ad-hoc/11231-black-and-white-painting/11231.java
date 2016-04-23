@@ -1,12 +1,10 @@
 /**
-  Need to calculate all the valid positions of the bottom right white
-  corner of the embedded chess table relative to the big chess table.
-  The valid positions are constrained to a w*h area chess table from
-  the bottom right where w = n-7 and h = m-7
-  The number of white positions inside this (w,h) tables is equivalent
-  to the solution.
+  Solution is given by the bottom right white corner's valid positions
+  inside the big chess table.
+  These valid positions are constrained to a w*h area chess table from
+  the bottom right, where w = n-7 and h = m-7.
   This number is the same if w*h is even and is 1 bigger or smaller
-  then the black count if w*h is odd (+1 if bottom right is white and
+  than the black count, if w*h is odd (+1 if bottom right is white and
   -1 if bottom right is black)
 **/
 import java.util.*;
