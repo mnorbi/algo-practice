@@ -40,7 +40,6 @@ class Main{
   private static void printTarget(int[] filling){
     StringBuilder sb = new StringBuilder();
     for(int a = 0; a < TARGET.length; ++a){
-      System.out.println(Arrays.toString(TARGET[a]));
       sb.append(input[filling[TARGET[a][0]]][TARGET[a][1]]);
     }
     System.out.println(sb);
