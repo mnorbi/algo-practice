@@ -51,7 +51,6 @@ class Main{
     if (ok){
       return permutation;
     }
-    System.out.println(Arrays.toString(permutation));
     return null;
   }
   private static boolean solve(int[] permutation, int pos){
@@ -74,11 +73,15 @@ class Main{
   }
   private static boolean check(int[] filling){
     for(int a = 0; a < filling.length/2; ++a){
-      if (filling[a] == CONSTRAINT_COL && input[filling[a]][CONSTRAINT_ROW] != CONSTRAINT_VAL) {
+      if (a == CONSTRAINT_COL && input[filling[a]][CONSTRAINT_ROW] != CONSTRAINT_VAL) {
         return false;
       }
       for(int b = 0; b < filling.length/2; ++b){
-        if (input[filling[a]][(a%2==0?3:0)+b] != input[filling[filling.length/2+b]][((filling.length/2+b)%2==0?3:0)+a]) return false;
+        char c1 = input[filling[a]][((a%2==0)?3:0)+b];
+        char c2 = input[filling[filling.length/2+b]][(((b%2)==0)?0:3)+a];
+        if (c1 != c2){
+          return false;
+        }
       }
     }
     return true;
