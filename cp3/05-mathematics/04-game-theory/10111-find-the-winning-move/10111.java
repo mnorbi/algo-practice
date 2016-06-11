@@ -38,13 +38,13 @@ class Main{
         if (board[a][b] == '.'){
           board[a][b] = player;
           boolean win = isWin(a,b);
-          boolean isCutoff = false;
+          boolean cutoff = false;
           if (!win){
             int otherPoint = solve(board, other(player), alpha, beta, sol);
             point = betterOf(point, otherPoint, player);
             alpha = newAlpha(point, alpha, player);
             beta = newBeta(point, beta, player);
-            if (beta <= alpha) isCutoff = true;
+            if (beta <= alpha) cutoff = true;
             win = isWin(point, player);
           }
           board[a][b] = '.';
@@ -52,7 +52,7 @@ class Main{
             sol[0] = a; sol[1] = b;
             return winPointOf(player);
           }
-          if (isCutoff) break;
+          if (cutoff) break;
         }
       }
     }
