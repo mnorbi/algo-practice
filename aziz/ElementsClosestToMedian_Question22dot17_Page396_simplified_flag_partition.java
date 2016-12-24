@@ -31,28 +31,40 @@ class ElementsClosestToMedian_simplified_partitioning{
         return Arrays.copyOfRange(arr, 0, k);
     }
 
+    /*
+        0 based kth index of the element in "c" based sorted order from the array arr[lo:hi)
+    */
     static void kthElement(int k, int[] arr, int lo, int hi, IntComparator c){
+        //k: 0 based
+        //lo: 0 based included
+        //hi: 0 based excluded
         int n = hi-lo;
         if (k < 0 || k >= n) return;
+        //convert into [lo,hi) space to avoid changing k later
         k = lo+k;
         while(true){
             int pivot = arr[lo];
+            //p: tail of pivots, inclusive
+            //q: head of pivots, exclusive
+            //r: head of abovePivotsm exclusive
             int p = lo, q = lo+1, r = hi-1;
             while(q <= r){
-              int cmp = c.compare(arr[q],pivot);
-              if (cmp < 0) { swap(arr, p++, q++); }
-              else if (cmp == 0) { ++q; }
-              else {
-                cmp = c.compare(arr[r], pivot);
-                if (cmp <= 0){ swap(arr, q, r--); }
-                else { --r; }
-              }
+                int cmp = c.compare(arr[q],pivot);
+                if (cmp < 0) { swap(arr, p++, q++); }//swap first pivot with underPivot
+                else if (cmp == 0) { ++q; }
+                else {
+                    cmp = c.compare(arr[r], pivot);
+                    if (cmp <= 0){ swap(arr, q, r--); }//q must not move, we need to move underPivot to left
+                    else { --r; }
+                }
             }
-            if (k < p){
+            //p: after last belowPivot element
+            //q: after last pivot element
+            if (k < p){//k in belowPivot zone
                 hi = p;
-            } else if (k >= q){
+            } else if (k >= q){//k in abovePivot zone
                 lo = q;
-            } else {
+            } else {//k in pivot zone
                 return;
             }
         }
