@@ -9,15 +9,17 @@ public class FindTheFirstMissingPositiveEntry_Question22dot2{
         System.out.println(firstMissingPositiveEntry(new int[]{3, 5, 4, -1, 5, 1, -1}));
     }
 
-    static int firstMissingPositiveEntry(int[] arr){
-      int p =0, n = arr.length;
-      while(p < n){
-        if (arr[p] < p+1 || arr[p] > n) {swap(arr, p, --n);}
-        else if (arr[p] == p+1) {++p;}
-        else swap(arr, p, arr[p]-1);
-      }
-      return p+1;
+    static int firstMissingPositiveEntry(int[] arr) {
+        int p = 1, n = arr.length;
+        while(p <= n){
+            int val = arr[p-1];
+            if (val < p || val > n) {swap(arr, p-1, --n);}
+            else if (val == p) {++p;}
+            else if (!swap(arr, p-1, val-1)){ return p; }
+        }
+        return p;
     }
+
     static boolean swap(int[] arr, int i, int j) {
         if (arr[i] == arr[j]) return false;
         int tmp = arr[i];
