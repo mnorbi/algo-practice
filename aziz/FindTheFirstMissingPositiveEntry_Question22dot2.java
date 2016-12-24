@@ -9,23 +9,15 @@ public class FindTheFirstMissingPositiveEntry_Question22dot2{
         System.out.println(firstMissingPositiveEntry(new int[]{3, 5, 4, -1, 5, 1, -1}));
     }
 
-    static int firstMissingPositiveEntry(int[] arr) {
-        int N = arr.length;
-        for (int i = 0; i < N; ) {
-            if (arr[i] < 1 || arr[i] > N){
-                arr[i] = arr[--N];
-                continue;
-            } else if (!swap(arr, arr[i]-1, i)){
-                ++i;
-            }
-        }
-
-        int i = 0;
-        for(; i < N && arr[i]-1 == i; ++i);
-
-        return i+1;
+    static int firstMissingPositiveEntry(int[] arr){
+      int p =0, n = arr.length;
+      while(p < n){
+        if (arr[p] < p+1 || arr[p] > n) {swap(arr, p, --n);}
+        else if (arr[p] == p+1) {++p;}
+        else swap(arr, p, arr[p]-1);
+      }
+      return p+1;
     }
-
     static boolean swap(int[] arr, int i, int j) {
         if (arr[i] == arr[j]) return false;
         int tmp = arr[i];
@@ -33,34 +25,4 @@ public class FindTheFirstMissingPositiveEntry_Question22dot2{
         arr[j] = tmp;
         return true;
     }
-/*
-  static int firstMissingPositiveEntry1(int[] arr){
-    int max = arr.length+1;
-
-    for(int i = 0; i < arr.length; ++i){
-      int idx = arr[i];
-      if (idx < 1 || idx >= max){
-        --max;
-        continue;
-      } else {
-        int nextIdx = arr[idx-1];
-        for(;idx != nextIdx;){
-          arr[idx-1] = idx;
-          if (nextIdx < 1 || nextIdx >= max){
-            --max;
-            break;
-          } else {
-            idx = nextIdx;
-            nextIdx = arr[nextIdx-1];
-          }
-        }
-      }
-    }
-    
-    int ret = 1;
-    for(; ret < max && ret == arr[ret-1]; ++ret);
-
-    return ret;
-  }
-*/
 }
