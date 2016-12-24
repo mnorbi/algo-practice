@@ -1,5 +1,5 @@
 import java.util.*;
-class ElementsClosestToMedian_v2{
+class ElementsClosestToMedian_simplified_partitioning{
     public static void main(String[]argS){
         print(closestToMedian(new int[]{7, 12, 10, 11, 2, 14, 29, 3, 4}, 5));//2 3 4 7 (10) 11 12 14 29
         print(closestToMedian(new int[]{7, 12, 10, 11, 2, 14, 29, 3, 4, 1}, 7));//1 2 3 4 (7 10) 11 12 14 29
@@ -19,40 +19,39 @@ class ElementsClosestToMedian_v2{
         int lMedId = (n-1)/2;
         int rMedId = n/2;
 
-        kthElement(lMedId + 1, arr, 0, n);
+        kthElement(lMedId, arr, 0, n);
         if (n%2 == 0){
-            kthElement(1, arr, rMedId, n);
+            kthElement(0, arr, rMedId, n);
         }
 
         Median median = new Median(arr[lMedId], arr[rMedId]);
 
-        kthElement(k, arr, 0, n, distanceToMedianComparator(median));
+        kthElement(k-1, arr, 0, n, distanceToMedianComparator(median));
 
         return Arrays.copyOfRange(arr, 0, k);
     }
 
     static void kthElement(int k, int[] arr, int lo, int hi, IntComparator c){
         int n = hi-lo;
-        if (k < 1 || k > n) return;
-
+        if (k < 0 || k >= n) return;
+        k = lo+k;
         while(true){
             int pivot = arr[lo];
             int p = lo, q = lo+1, r = hi-1;
             while(q <= r){
-              int cmp = c.compare(pivot,arr[q]);
+              int cmp = c.compare(arr[q],pivot);
               if (cmp < 0) { swap(arr, p++, q++); }
               else if (cmp == 0) { ++q; }
               else {
-                cmp = c.compare(pivot, arr[r]);
-                if (cmp <= 0){ swap(arr, q++, --r); }
+                cmp = c.compare(arr[r], pivot);
+                if (cmp <= 0){ swap(arr, q, r--); }
                 else { --r; }
               }
             }
-            if (k > (q-lo)){
-                k -= (q-lo);
+            if (k < p){
+                hi = p;
+            } else if (k >= q){
                 lo = q;
-            } else if (k <= p){
-                hi = lo+p;
             } else {
                 return;
             }
@@ -70,12 +69,6 @@ class ElementsClosestToMedian_v2{
                 return ret;
             }
         };
-    }
-
-    static void reverse(int[] arr, int lo, int hi){
-        for(int i = lo, j = hi-1; i < j; ++i, --j){
-            swap(arr, i, j);
-        }
     }
 
     static void swap(int[] arr, int a, int b){
@@ -117,3 +110,4 @@ class ElementsClosestToMedian_v2{
     }
 
 }
+
