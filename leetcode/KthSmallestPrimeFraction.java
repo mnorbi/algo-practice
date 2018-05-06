@@ -1,5 +1,4 @@
 class KthSmallestPrimeFraction{
-
     class Solution {
         private static final boolean[] primes = new boolean[30_001];
         static {
@@ -28,7 +27,7 @@ class KthSmallestPrimeFraction{
             }
 
             int lastPrimeIdx = prevIdx;//<0?
-            for(int a = 0; a < A.length; ++a){
+            for(int a = 0; a < lastPrimeIdx; ++a){
                 pq.add(new int[]{a,lastPrimeIdx});
             }
 
@@ -36,7 +35,7 @@ class KthSmallestPrimeFraction{
                 --K;
                 int[] v = pq.remove();
                 v[1] = prevPrimeIdx[v[1]];
-                if (v[1] > 0){
+                if (v[1] > 0 && v[1] > v[0]){
                     pq.add(v);
                 }
             }
@@ -45,6 +44,4 @@ class KthSmallestPrimeFraction{
             return new int[]{A[v[0]],A[v[1]]};
         }
     }
-
-
 }
