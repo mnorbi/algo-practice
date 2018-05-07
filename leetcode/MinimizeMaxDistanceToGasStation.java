@@ -12,7 +12,7 @@ class MinimizeMaxDistanceToGasStation{
 			}
 			dists.put(dist, dists.get(dist)+1);
 		}
-		PriorityQueue<Dist> pq = new PriorityQueue<>((d1,d2)-> Double.compare(d1.len,d2.len));
+		PriorityQueue<Dist> pq = new PriorityQueue<>((d1,d2)-> -Double.compare(d1.len,d2.len));//#bug #comparison was increasing
 		for(Map.Entry<Integer, Integer> entry : dists.entrySet()){
 			Dist dist = new Dist();
 			dist.len = entry.getKey();
