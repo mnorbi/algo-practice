@@ -1,5 +1,10 @@
 import java.util.*;
 import java.io.*;
+/*
+  m <= n
+  dp[n][m] = n long, m uniq
+	m*(dp[n-1][m-1] + (m<=n-1)? dp[n-1][m] : 0)
+*/
 public class A {
     public static void main(String[] args) throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
